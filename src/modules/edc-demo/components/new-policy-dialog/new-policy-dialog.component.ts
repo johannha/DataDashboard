@@ -15,7 +15,8 @@ export class NewPolicyDialogComponent implements OnInit {
   };
   policyDefinition: PolicyDefinition = {
     policy: this.policy,
-    uid: ''
+    uid: '',
+    id: ''
   };
   permissionsJson: string = '';
   prohibitionsJson: string = '';

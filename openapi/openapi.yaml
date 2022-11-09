@@ -90,7 +90,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/DataPlaneInstance'
+                  $ref: "#/components/schemas/DataPlaneInstance"
     post:
       tags:
         - Dataplane Selector
@@ -99,7 +99,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DataPlaneInstance'
+              $ref: "#/components/schemas/DataPlaneInstance"
       responses:
         default:
           description: default response
@@ -114,14 +114,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/SelectionRequest'
+              $ref: "#/components/schemas/SelectionRequest"
       responses:
         default:
           description: default response
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DataPlaneInstance'
+                $ref: "#/components/schemas/DataPlaneInstance"
   /catalog:
     get:
       tags:
@@ -141,7 +141,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Catalog'
+                $ref: "#/components/schemas/Catalog"
   /federatedcatalog:
     post:
       operationId: getCachedCatalog
@@ -149,7 +149,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/FederatedCatalogCacheQuery'
+              $ref: "#/components/schemas/FederatedCatalogCacheQuery"
       responses:
         default:
           description: default response
@@ -158,12 +158,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ContractOffer'
+                  $ref: "#/components/schemas/ContractOffer"
   /check/health:
     get:
       tags:
         - Application Observability
-      description: Performs a liveness probe to determine whether the runtime is working
+      description:
+        Performs a liveness probe to determine whether the runtime is working
         properly.
       operationId: checkHealth
       responses:
@@ -174,12 +175,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HealthStatus'
+                  $ref: "#/components/schemas/HealthStatus"
   /check/liveness:
     get:
       tags:
         - Application Observability
-      description: Performs a liveness probe to determine whether the runtime is working
+      description:
+        Performs a liveness probe to determine whether the runtime is working
         properly.
       operationId: getLiveness
       responses:
@@ -190,12 +192,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HealthStatus'
+                  $ref: "#/components/schemas/HealthStatus"
   /check/readiness:
     get:
       tags:
         - Application Observability
-      description: Performs a readiness probe to determine whether the runtime is
+      description:
+        Performs a readiness probe to determine whether the runtime is
         able to accept requests.
       operationId: getReadiness
       responses:
@@ -206,12 +209,13 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HealthStatus'
+                  $ref: "#/components/schemas/HealthStatus"
   /check/startup:
     get:
       tags:
         - Application Observability
-      description: Performs a startup probe to determine whether the runtime has completed
+      description:
+        Performs a startup probe to determine whether the runtime has completed
         startup.
       operationId: getStartup
       responses:
@@ -222,7 +226,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/HealthStatus'
+                  $ref: "#/components/schemas/HealthStatus"
   /callback/{processId}/deprovision:
     post:
       tags:
@@ -240,7 +244,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DeprovisionedResource'
+              $ref: "#/components/schemas/DeprovisionedResource"
       responses:
         default:
           description: default response
@@ -263,7 +267,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ProvisionerWebhookRequest'
+              $ref: "#/components/schemas/ProvisionerWebhookRequest"
       responses:
         default:
           description: default response
@@ -324,7 +328,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ContractAgreementDto'
+                  $ref: "#/components/schemas/ContractAgreementDto"
         "400":
           description: Request body was malformed
   /contractagreements/{id}:
@@ -347,7 +351,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractAgreementDto'
+                $ref: "#/components/schemas/ContractAgreementDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -407,7 +411,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/AssetDto'
+                  $ref: "#/components/schemas/AssetDto"
         "400":
           description: Request body was malformed
     post:
@@ -419,14 +423,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AssetEntryDto'
+              $ref: "#/components/schemas/AssetEntryDto"
       responses:
         "200":
           description: Asset was created successfully
         "400":
           description: Request body was malformed
         "409":
-          description: "Could not create asset, because an asset with that ID already\
+          description:
+            "Could not create asset, because an asset with that ID already\
             \ exists"
   /assets/{id}:
     get:
@@ -448,7 +453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AssetDto'
+                $ref: "#/components/schemas/AssetDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -456,7 +461,8 @@ paths:
     delete:
       tags:
         - Asset
-      description: "Removes an asset with the given ID if possible. Deleting an asset\
+      description:
+        "Removes an asset with the given ID if possible. Deleting an asset\
         \ is only possible if that asset is not yet referenced by a contract agreement,\
         \ in which case an error is returned. DANGER ZONE: Note that deleting assets\
         \ can have unexpected results, especially for contract offers that have been\
@@ -478,7 +484,8 @@ paths:
         "404":
           description: An asset with the given ID does not exist
         "409":
-          description: "The asset cannot be deleted, because it is referenced by a\
+          description:
+            "The asset cannot be deleted, because it is referenced by a\
             \ contract agreement"
   /contractdefinitions:
     get:
@@ -535,7 +542,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ContractDefinitionDto'
+                  $ref: "#/components/schemas/ContractDefinitionDto"
         "400":
           description: Request was malformed
     post:
@@ -545,16 +552,17 @@ paths:
       operationId: createContractDefinition
       requestBody:
         content:
-          '*/*':
+          "*/*":
             schema:
-              $ref: '#/components/schemas/ContractDefinitionDto'
+              $ref: "#/components/schemas/ContractDefinitionDto"
       responses:
         "200":
           description: contract definition was created successfully
         "400":
           description: Request body was malformed
         "409":
-          description: "Could not create contract definition, because a contract definition\
+          description:
+            "Could not create contract definition, because a contract definition\
             \ with that ID already exists"
   /contractdefinitions/{id}:
     get:
@@ -576,7 +584,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractDefinitionDto'
+                $ref: "#/components/schemas/ContractDefinitionDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -584,7 +592,8 @@ paths:
     delete:
       tags:
         - Contract Definition
-      description: "Removes a contract definition with the given ID if possible. DANGER\
+      description:
+        "Removes a contract definition with the given ID if possible. DANGER\
         \ ZONE: Note that deleting contract definitions can have unexpected results,\
         \ especially for contract offers that have been sent out or ongoing or contract\
         \ negotiations."
@@ -659,13 +668,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/ContractNegotiationDto'
+                  $ref: "#/components/schemas/ContractNegotiationDto"
         "400":
           description: Request was malformed
     post:
       tags:
         - Contract Negotiation
-      description: "Initiates a contract negotiation for a given offer and with the\
+      description:
+        "Initiates a contract negotiation for a given offer and with the\
         \ given counter part. Please note that successfully invoking this endpoint\
         \ only means that the negotiation was initiated. Clients must poll the /{id}/state\
         \ endpoint to track the state"
@@ -674,15 +684,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/NegotiationInitiateRequestDto'
+              $ref: "#/components/schemas/NegotiationInitiateRequestDto"
       responses:
         "200":
-          description: The negotiation was successfully initiated. Returns the contract
+          description:
+            The negotiation was successfully initiated. Returns the contract
             negotiation ID
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NegotiationId'
+                $ref: "#/components/schemas/NegotiationId"
           links:
             poll-state:
               operationId: getNegotiationState
@@ -710,7 +721,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractNegotiationDto'
+                $ref: "#/components/schemas/ContractNegotiationDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -719,7 +730,8 @@ paths:
     get:
       tags:
         - Contract Negotiation
-      description: Gets a contract agreement for a contract negotiation with the given
+      description:
+        Gets a contract agreement for a contract negotiation with the given
         ID
       operationId: getAgreementForNegotiation
       parameters:
@@ -732,12 +744,13 @@ paths:
             type: string
       responses:
         "200":
-          description: "The contract agreement that is attached to the negotiation,\
+          description:
+            "The contract agreement that is attached to the negotiation,\
             \ or null"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ContractNegotiationDto'
+                $ref: "#/components/schemas/ContractNegotiationDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -746,7 +759,8 @@ paths:
     post:
       tags:
         - Contract Negotiation
-      description: "Requests aborting the contract negotiation. Due to the asynchronous\
+      description:
+        "Requests aborting the contract negotiation. Due to the asynchronous\
         \ nature of contract negotiations, a successful response only indicates that\
         \ the request was successfully received. Clients must poll the /{id}/state\
         \ endpoint to track the state."
@@ -761,7 +775,8 @@ paths:
             type: string
       responses:
         "200":
-          description: Request to cancel the Contract negotiation was successfully
+          description:
+            Request to cancel the Contract negotiation was successfully
             received
           links:
             poll-state:
@@ -774,7 +789,8 @@ paths:
     post:
       tags:
         - Contract Negotiation
-      description: "Requests cancelling the contract negotiation. Due to the asynchronous\
+      description:
+        "Requests cancelling the contract negotiation. Due to the asynchronous\
         \ nature of contract negotiations, a successful response only indicates that\
         \ the request was successfully received. Clients must poll the /{id}/state\
         \ endpoint to track the state."
@@ -789,7 +805,8 @@ paths:
             type: string
       responses:
         "200":
-          description: Request to decline the Contract negotiation was successfully
+          description:
+            Request to decline the Contract negotiation was successfully
             received
           links:
             poll-state:
@@ -818,7 +835,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/NegotiationState'
+                $ref: "#/components/schemas/NegotiationState"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -878,7 +895,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PolicyDefinition'
+                  $ref: "#/components/schemas/PolicyDefinition"
         "400":
           description: Request was malformed
     post:
@@ -890,14 +907,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PolicyDefinition'
+              $ref: "#/components/schemas/PolicyDefinition"
       responses:
         "200":
           description: policy definition was created successfully
         "400":
           description: Request body was malformed
         "409":
-          description: "Could not create policy definition, because a contract definition\
+          description:
+            "Could not create policy definition, because a contract definition\
             \ with that ID already exists"
   /policydefinitions/{id}:
     get:
@@ -919,7 +937,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/PolicyDefinition'
+                $ref: "#/components/schemas/PolicyDefinition"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -927,7 +945,8 @@ paths:
     delete:
       tags:
         - Policy
-      description: "Removes a policy definition with the given ID if possible. Deleting\
+      description:
+        "Removes a policy definition with the given ID if possible. Deleting\
         \ a policy definition is only possible if that policy definition is not yet\
         \ referenced by a contract definition, in which case an error is returned.\
         \ DANGER ZONE: Note that deleting policy definitions can have unexpected results,\
@@ -949,7 +968,8 @@ paths:
         "404":
           description: An policy definition with the given ID does not exist
         "409":
-          description: "The policy definition cannot be deleted, because it is referenced\
+          description:
+            "The policy definition cannot be deleted, because it is referenced\
             \ by a contract definition"
   /transferprocess:
     get:
@@ -1006,13 +1026,14 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/TransferProcessDto'
+                  $ref: "#/components/schemas/TransferProcessDto"
         "400":
           description: Request was malformed
     post:
       tags:
         - Transfer Process
-      description: "Initiates a data transfer with the given parameters. Please note\
+      description:
+        "Initiates a data transfer with the given parameters. Please note\
         \ that successfully invoking this endpoint only means that the transfer was\
         \ initiated. Clients must poll the /{id}/state endpoint to track the state"
       operationId: initiateTransfer
@@ -1020,15 +1041,16 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransferRequestDto'
+              $ref: "#/components/schemas/TransferRequestDto"
       responses:
         "200":
-          description: The transfer was successfully initiated. Returns the transfer
+          description:
+            The transfer was successfully initiated. Returns the transfer
             process ID
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransferId'
+                $ref: "#/components/schemas/TransferId"
           links:
             poll-state:
               operationId: getTransferProcessState
@@ -1056,7 +1078,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransferProcessDto'
+                $ref: "#/components/schemas/TransferProcessDto"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -1065,7 +1087,8 @@ paths:
     post:
       tags:
         - Transfer Process
-      description: "Requests aborting the transfer process. Due to the asynchronous\
+      description:
+        "Requests aborting the transfer process. Due to the asynchronous\
         \ nature of transfers, a successful response only indicates that the request\
         \ was successfully received. Clients must poll the /{id}/state endpoint to\
         \ track the state."
@@ -1092,7 +1115,8 @@ paths:
     post:
       tags:
         - Transfer Process
-      description: "Requests the deprovisioning of resources associated with a transfer\
+      description:
+        "Requests the deprovisioning of resources associated with a transfer\
         \ process. Due to the asynchronous nature of transfers, a successful response\
         \ only indicates that the request was successfully received. This may take\
         \ a long time, so clients must poll the /{id}/state endpoint to track the\
@@ -1108,7 +1132,8 @@ paths:
             type: string
       responses:
         "200":
-          description: Request to deprovision the transfer process was successfully
+          description:
+            Request to deprovision the transfer process was successfully
             received
           links:
             poll-state:
@@ -1137,7 +1162,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TransferState'
+                $ref: "#/components/schemas/TransferState"
         "400":
           description: "Request was malformed, e.g. id was null"
         "404":
@@ -1148,7 +1173,7 @@ components:
       type: object
       properties:
         constraint:
-          $ref: '#/components/schemas/Constraint'
+          $ref: "#/components/schemas/Constraint"
         includedIn:
           type: string
         type:
@@ -1176,16 +1201,16 @@ components:
       type: object
       properties:
         asset:
-          $ref: '#/components/schemas/AssetDto'
+          $ref: "#/components/schemas/AssetDto"
         dataAddress:
-          $ref: '#/components/schemas/DataAddressDto'
+          $ref: "#/components/schemas/DataAddressDto"
     Catalog:
       type: object
       properties:
         contractOffers:
           type: array
           items:
-            $ref: '#/components/schemas/ContractOffer'
+            $ref: "#/components/schemas/ContractOffer"
         id:
           type: string
     Constraint:
@@ -1222,7 +1247,7 @@ components:
         id:
           type: string
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
         providerAgentId:
           type: string
     ContractDefinitionDto:
@@ -1240,7 +1265,7 @@ components:
         criteria:
           type: array
           items:
-            $ref: '#/components/schemas/Criterion'
+            $ref: "#/components/schemas/Criterion"
         id:
           type: string
     ContractNegotiationDto:
@@ -1267,7 +1292,7 @@ components:
       type: object
       properties:
         asset:
-          $ref: '#/components/schemas/Asset'
+          $ref: "#/components/schemas/Asset"
         assetId:
           type: string
         consumer:
@@ -1288,7 +1313,7 @@ components:
           type: string
           format: date-time
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
         provider:
           type: string
           format: uri
@@ -1304,7 +1329,7 @@ components:
         offerId:
           type: string
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
     Criterion:
       type: object
       properties:
@@ -1377,19 +1402,19 @@ components:
       type: object
       properties:
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: "#/components/schemas/Action"
         assignee:
           type: string
         assigner:
           type: string
         consequence:
-          $ref: '#/components/schemas/Duty'
+          $ref: "#/components/schemas/Duty"
         constraints:
           type: array
           items:
-            $ref: '#/components/schemas/Constraint'
+            $ref: "#/components/schemas/Constraint"
         parentPermission:
-          $ref: '#/components/schemas/Permission'
+          $ref: "#/components/schemas/Permission"
         target:
           type: string
         uid:
@@ -1407,14 +1432,14 @@ components:
         criteria:
           type: array
           items:
-            $ref: '#/components/schemas/Criterion'
+            $ref: "#/components/schemas/Criterion"
     HealthCheckResult:
       type: object
       properties:
         component:
           type: string
         failure:
-          $ref: '#/components/schemas/Failure'
+          $ref: "#/components/schemas/Failure"
         isHealthy:
           type: boolean
     HealthStatus:
@@ -1423,7 +1448,7 @@ components:
         componentResults:
           type: array
           items:
-            $ref: '#/components/schemas/HealthCheckResult'
+            $ref: "#/components/schemas/HealthCheckResult"
         isSystemHealthy:
           type: boolean
     NegotiationId:
@@ -1444,7 +1469,7 @@ components:
         connectorId:
           type: string
         offer:
-          $ref: '#/components/schemas/ContractOfferDescription'
+          $ref: "#/components/schemas/ContractOfferDescription"
         protocol:
           type: string
     NegotiationState:
@@ -1456,7 +1481,7 @@ components:
       type: object
       properties:
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: "#/components/schemas/Action"
         assignee:
           type: string
         assigner:
@@ -1464,11 +1489,11 @@ components:
         constraints:
           type: array
           items:
-            $ref: '#/components/schemas/Constraint'
+            $ref: "#/components/schemas/Constraint"
         duties:
           type: array
           items:
-            $ref: '#/components/schemas/Duty'
+            $ref: "#/components/schemas/Duty"
         target:
           type: string
         uid:
@@ -1476,7 +1501,7 @@ components:
     Policy:
       type: object
       properties:
-        '@type':
+        "@type":
           type: string
           enum:
             - SET
@@ -1495,29 +1520,31 @@ components:
         obligations:
           type: array
           items:
-            $ref: '#/components/schemas/Duty'
+            $ref: "#/components/schemas/Duty"
         permissions:
           type: array
           items:
-            $ref: '#/components/schemas/Permission'
+            $ref: "#/components/schemas/Permission"
         prohibitions:
           type: array
           items:
-            $ref: '#/components/schemas/Prohibition'
+            $ref: "#/components/schemas/Prohibition"
         target:
           type: string
     PolicyDefinition:
       type: object
       properties:
         policy:
-          $ref: '#/components/schemas/Policy'
+          $ref: "#/components/schemas/Policy"
         uid:
+          type: string
+        id:
           type: string
     Prohibition:
       type: object
       properties:
         action:
-          $ref: '#/components/schemas/Action'
+          $ref: "#/components/schemas/Action"
         assignee:
           type: string
         assigner:
@@ -1525,7 +1552,7 @@ components:
         constraints:
           type: array
           items:
-            $ref: '#/components/schemas/Constraint'
+            $ref: "#/components/schemas/Constraint"
         target:
           type: string
         uid:
@@ -1544,7 +1571,7 @@ components:
         assetId:
           type: string
         contentDataAddress:
-          $ref: '#/components/schemas/DataAddress'
+          $ref: "#/components/schemas/DataAddress"
         hasToken:
           type: boolean
         resourceDefinitionId:
@@ -1555,9 +1582,9 @@ components:
       type: object
       properties:
         destination:
-          $ref: '#/components/schemas/DataAddress'
+          $ref: "#/components/schemas/DataAddress"
         source:
-          $ref: '#/components/schemas/DataAddress'
+          $ref: "#/components/schemas/DataAddress"
         strategy:
           type: string
     TransferId:
@@ -1572,9 +1599,9 @@ components:
           type: integer
           format: int64
         dataDestination:
-          $ref: '#/components/schemas/DataAddressInformationDto'
+          $ref: "#/components/schemas/DataAddressInformationDto"
         dataRequest:
-          $ref: '#/components/schemas/DataRequestDto'
+          $ref: "#/components/schemas/DataRequestDto"
         errorDetail:
           type: string
         id:
@@ -1606,7 +1633,7 @@ components:
         contractId:
           type: string
         dataDestination:
-          $ref: '#/components/schemas/DataAddress'
+          $ref: "#/components/schemas/DataAddress"
         id:
           type: string
         managedResources:
@@ -1618,7 +1645,7 @@ components:
         protocol:
           type: string
         transferType:
-          $ref: '#/components/schemas/TransferType'
+          $ref: "#/components/schemas/TransferType"
     TransferState:
       type: object
       properties:

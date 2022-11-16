@@ -6,6 +6,7 @@ echo "--------------------------------------------"
 curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "asset": {
         "properties": {
@@ -30,6 +31,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "asset": {
         "properties": {
@@ -54,6 +56,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "asset": {
         "properties": {
@@ -78,6 +81,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "asset": {
         "properties": {
@@ -102,6 +106,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 curl --location --request POST 'http://localhost:8182/api/v1/data/assets' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "asset": {
         "properties": {
@@ -131,6 +136,7 @@ echo "--------------------------------------------"
 curl --location --request POST 'http://localhost:8182/api/v1/data/policydefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "policy": {
         "id": "gaiax-4plc-aad-intern-use",
@@ -173,6 +179,7 @@ echo "--------------------------------------------"
 curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "accessPolicyId": "gaiax-4plc-aad-intern-use",
     "contractPolicyId": "gaiax-4plc-aad-intern-use",
@@ -189,6 +196,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefini
 curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "accessPolicyId": "gaiax-4plc-aad-intern-use",
     "contractPolicyId": "gaiax-4plc-aad-intern-use",
@@ -205,6 +213,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefini
 curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "accessPolicyId": "gaiax-4plc-aad-intern-use",
     "contractPolicyId": "gaiax-4plc-aad-intern-use",
@@ -221,6 +230,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefini
 curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "accessPolicyId": "gaiax-4plc-aad-intern-use",
     "contractPolicyId": "gaiax-4plc-aad-intern-use",
@@ -237,6 +247,7 @@ curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefini
 curl --location --request POST 'http://localhost:8182/api/v1/data/contractdefinitions' \
 --header 'Content-Type: application/json' \
 --header 'Accept: application/json' \
+--header 'x-api-key: password' \
 --data-raw '{
     "accessPolicyId": "gaiax-4plc-aad-intern-use",
     "contractPolicyId": "gaiax-4plc-aad-intern-use",

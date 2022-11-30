@@ -10,9 +10,9 @@ EDC Data Dashboard is a dev frontend application for [EDC Data Management API](h
 
 In order to try the demonstration, you need to run three applications:
 
-1. EDC Provider
-2. Tezos-EDC Interface
-3. Angular Frontend
+1. [EDC Provider](https://github.com/JulianLegler/DataSpaceConnector)
+2. [Tezos-EDC Interface](https://github.com/johannha/edc-interface/tree/w/indexer)
+3. [Frontend](https://github.com/johannha/DataDashboard/tree/main)
 
 ### Steps:
 
@@ -23,7 +23,7 @@ In order to try the demonstration, you need to run three applications:
 
 - Run `npm install` to install all dependencies
 
-- Run `npm run start-edc` to start provider part of the EDC (Java must installed locally). An EDC instance should now be running which implements an extension accessing the blockchain by using the Tezos client provided by EDC-Interface. Source code for this EDC version can be found in this EDC Fork.
+- Run `npm run start-edc` to start provider part of the EDC (Java must installed locally). An EDC instance should now be running which implements an extension accessing the blockchain by using the Tezos client provided by EDC-Interface. Source code for this EDC version can be found in this [EDC Fork](https://github.com/JulianLegler/DataSpaceConnector).
 
 - Run `npm run start` to host angular frontend
 

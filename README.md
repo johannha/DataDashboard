@@ -13,7 +13,7 @@ Pre-built docker images can be found in the following Repository: [DataDashboard
 Provide environment variables in the docker run command in order to modify the Data Management Url or the Data Catalog Url.
 
 ```
-docker run --rm -p 3000:80 -e DATA_MANAGEMENT_URL="http://localhost:8182/api/v1/data" -e CATALOG_URL="http://localhost:8181/api/federatedcatalog"  dashboard-image
+docker run --rm -p 3000:80 -e DATA_MANAGEMENT_URL="http://localhost:8182/api/v1/data" -e CATALOG_URL="http://localhost:8181/api/federatedcatalog"  johann1999/data-dashboard:linux-env
 ```
 
 ## Documentation

@@ -19,7 +19,12 @@ EXPOSE 80
 ENV COMMENT="This file will be replaced at runtime when deployed to the cloud"
 ENV DATA_MANAGEMENT_URL="http://localhost:8182/api/v1/data"
 ENV CATALOG_URL="http://localhost:8181/api/federatedcatalog"
+ENV STORAGE_ACCOUNT="account"
+ENV STORAGE_EXPLORER_LINK_TEMPLATE="storageexplorer://v=1"
+ENV API_KEY="password"
+ENV THEME="theme-1"
 
-CMD ["/bin/sh",  "-c", "echo '{\n  \"_comment\": \"'$COMMENT'\",\n  \"dataManagementApiUrl\": \"'$DATA_MANAGEMENT_URL'\",\n  \"catalogUrl\": \"'$CATALOG_URL'\",\n  \"storageAccount\": \"account\",\n  \"storageExplorerLinkTemplate\": \"storageexplorer://v=1\",\n  \"apiKey\": \"password\",\n  \"theme\": \"theme-1\"\n}' > /usr/share/nginx/html/assets/config/app.config.json && exec nginx -g 'daemon off;'"]
+
+CMD ["/bin/sh",  "-c", "echo '{\n  \"_comment\": \"'$COMMENT'\",\n  \"dataManagementApiUrl\": \"'$DATA_MANAGEMENT_URL'\",\n  \"catalogUrl\": \"'$CATALOG_URL'\",\n  \"storageAccount\": \"'$STORAGE_ACCOUNT'\",\n  \"storageExplorerLinkTemplate\": \"'$STORAGE_EXPLORER_LINK_TEMPLATE'\",\n  \"apiKey\": \"'$API_KEY'\",\n  \"theme\": \"'$THEME'\"\n}' > /usr/share/nginx/html/assets/config/app.config.json && exec nginx -g 'daemon off;'"]
 # HEALTHCHECK --interval=2s --timeout=5s --retries=10 \
 #     CMD curl -f http://localhost/ || exit 1

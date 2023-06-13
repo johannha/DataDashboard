@@ -75,12 +75,12 @@ export class ContractViewerComponent implements OnInit {
     const dialogRef = this.dialog.open(CatalogBrowserTransferDialog);
 
     dialogRef.afterClosed().pipe(first()).subscribe(result => {
-      const storageTypeId: string = result.storageTypeId;
+     /*  const storageTypeId: string = result.storageTypeId;
       if (storageTypeId !== 'AzureStorage') {
         this.notificationService.showError("Only storage type \"AzureStorage\" is implemented currently!")
         return;
-      }
-      this.createTransferRequest(contract, storageTypeId)
+      } */
+      this.createTransferRequest(contract, "httppush")
         .pipe(switchMap(trq => this.transferService.initiateTransfer(trq)))
         .subscribe(transferId => {
           this.startPolling(transferId, contract.id!);
@@ -100,18 +100,15 @@ export class ContractViewerComponent implements OnInit {
       return {
         assetId: offeredAsset.id,
         contractId: contract.id,
-        connectorId: "consumer", //doesn't matter, but cannot be null
+        connectorId: "http-push-provider", //doesn't matter, but cannot be null
         dataDestination: {
           properties: {
-            "type": storageTypeId,
-            account: this.homeConnectorStorageAccount, // CAUTION: hardcoded value for AzureBlob
-            // container: omitted, so it will be auto-assigned by the EDC runtime
+            "baseUrl": "http://http-push-backend-services:4000/api/consumer/store",
+            "type": "HttpData"
           }
         },
-        managedResources: true,
-        transferType: {isFinite: true}, //must be there, otherwise NPE on backend
+        managedResources: false,
         connectorAddress: offeredAsset.originator,
-        protocol: 'ids-multipart'
       };
     }));
 
@@ -124,9 +121,10 @@ export class ContractViewerComponent implements OnInit {
    * @param assetId Asset ID of the asset that is associated with the contract.
    */
   private getOfferedAssetForId(assetId: string): Observable<Asset> {
+    console.log(this.catalogService.getContractOffers())
     return this.catalogService.getContractOffers()
       .pipe(
-        map(offers => offers.find(o => `urn:artifact:${o.asset.id}` === assetId)),
+        map(offers => offers.find(o => o.asset.id === assetId)),
         map(o => {
           if (o) return o.asset;
           else throw new Error(`No offer found for asset ID ${assetId}`);

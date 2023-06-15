@@ -20,7 +20,7 @@ export class AssetEditorDialog implements OnInit {
   account: string = '';
   container: string = 'src-container';
 
-  originator: string = 'http://container-1:8182/api/v1/data';
+  originator: string = 'http://connector-1:8182/api/v1/data';
   baseUrl: string = "http://techslides.com/demos/samples/sample.txt";
 
   gaiaxSelfdescription: string = "";

@@ -24,9 +24,11 @@ export class AssetEditorDialog implements OnInit {
   baseUrl: string = "http://techslides.com/demos/samples/sample.txt";
 
   gaiaxSelfdescription: string = "";
+  gaiaxSelfdescriptionJson: any = {};
 
   updateGaiaxSelfDescription() {
-    this.gaiaxSelfdescription = `"@context": {
+    this.gaiaxSelfdescription = `{
+      "@context": {
       "cc": "http://creativecommons.org/ns#",
       "schema": "http://schema.org/",
       "void": "http://rdfs.org/ns/void#",
@@ -112,7 +114,8 @@ export class AssetEditorDialog implements OnInit {
           }
       }
   ]
-  }`
+  }`;
+    this.gaiaxSelfdescriptionJson = JSON.parse(this.gaiaxSelfdescription);
   }
 
   constructor(private assetService: AssetService, private dialogRef: MatDialogRef<AssetEditorDialog>,
@@ -131,7 +134,7 @@ export class AssetEditorDialog implements OnInit {
           "asset:prop:version": this.version,
           "asset:prop:id": this.id,
           "asset:prop:contenttype": this.contenttype,
-          "asset:prop:gaiax:selfdescription": this.gaiaxSelfdescription,
+          "asset:prop:gaiax:selfdescription": this.gaiaxSelfdescriptionJson,
           "asset:prop:originator": this.originator,
         }
       },

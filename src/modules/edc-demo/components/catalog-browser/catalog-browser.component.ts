@@ -59,11 +59,11 @@ export class CatalogBrowserComponent implements OnInit {
       connectorAddress: contractOffer.asset.originator,
 
       offer: {
-        offerId: contractOffer.id,
+        offerId: contractOffer.id + ":1337",
         assetId: contractOffer.asset.id,
         policy: contractOffer.policy,
       },
-      connectorId: 'yomama',
+      connectorId: 'tu-berlin:blockchain:connector',
       protocol: 'ids-multipart'
     };
 

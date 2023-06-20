@@ -22,7 +22,5 @@ export interface TransferRequestDto {
     id?: string;
     managedResources?: boolean;
     properties?: { [key: string]: string; };
-    protocol: string;
-    transferType: TransferType;
 }
 

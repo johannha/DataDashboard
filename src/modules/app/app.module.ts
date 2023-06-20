@@ -63,7 +63,7 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
     {provide: API_KEY, useFactory: (s: AppConfigService) => s.getConfig()?.apiKey, deps: [AppConfigService]},
     {
       provide: 'STORAGE_TYPES',
-      useFactory: () => [{id: "AzureStorage", name: "AzureStorage"}, {id: "AmazonS3", name: "AmazonS3"}],
+      useFactory: () => [{id: "AzureStorage", name: "AzureStorage"}, {id: "AmazonS3", name: "AmazonS3"}, {id: "HTTPPush", name: "HTTPPush"}],
     },
   ],
   bootstrap: [AppComponent]

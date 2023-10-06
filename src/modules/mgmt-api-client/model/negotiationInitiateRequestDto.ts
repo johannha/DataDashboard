@@ -18,5 +18,7 @@ export interface NegotiationInitiateRequestDto {
     connectorId: string;
     offer: ContractOfferDescription;
     protocol: string;
+    consumerId: string;
+    providerId: string;
 }
 

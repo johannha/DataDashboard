@@ -28,7 +28,7 @@ export interface Policy {
 export namespace Policy {
     export type TypeEnum = 'SET' | 'OFFER' | 'CONTRACT';
     export const TypeEnum = {
-        Set: 'SET' as TypeEnum,
+        Set: 'Set' as TypeEnum,
         Offer: 'OFFER' as TypeEnum,
         Contract: 'CONTRACT' as TypeEnum
     };

@@ -35,65 +35,71 @@ export class CatalogBrowserService {
   getContractOffers(): Observable<ContractOffer[]> {
     let url = this.catalogApiUrl || this.managementApiUrl;
     return this.post<ContractOffer[]>(url + "/federatedcatalog")
-      .pipe(map(contractOffers => contractOffers.map(contractOffer => {
+    .pipe(
+      map((data: any) => {
+        let dataservice = data["dcat:service"];
+        let dataset = data["dcat:dataset"];
+
+        console.log("ResponseBody: ");
+        console.log(data);
+        console.log("Datasets Array: ");
+        console.log(dataset);
+        console.log("Dataservices Array: ");
+        console.log(dataservice);
+
         const arr = Array<ContractOffer>();
-        let isFirst = true;
-        //divides multiple offers in dataSets into separate contractOffers.
-        for(let i = 0; i<contractOffer["dcat:dataset"].length; i++){
-          const dataSet: any = contractOffer["dcat:dataset"][i];
-          const properties: { [key: string]: string; } = {
-            "edc:id": dataSet["edc:id"],
-            "edc:name": dataSet["edc:name"],
-            "edc:version": dataSet["edc:version"],
-            "type": dataSet["edc:type"],
-            "edc:contenttype": dataSet["edc:contenttype"],
-            "edc:originator": contractOffer["edc:originator"]
-          }
-          const asset: Asset = new Asset(properties);
 
-          let id: string = "";
-          let policy: Policy = {
-            //currently hardcoded to SET since parsed type is {"@policytype": "set"}
-            "@type": TypeEnum.Set,
-            "@id": dataSet["odrl:hasPolicy"]["@id"],
-            "assignee": dataSet["odrl:hasPolicy"]["assignee"],
-            "assigner": dataSet["odrl:hasPolicy"]["assigner"],
-            "odrl:obligation": dataSet["odrl:hasPolicy"]["odrl:obligations"],
-            "odrl:permission": dataSet["odrl:hasPolicy"]["odrl:permissions"],
-            "odrl:prohibition": dataSet["odrl:hasPolicy"]["odrl:prohibitions"],
-            "odrl:target": dataSet["odrl:hasPolicy"]["odrl:target"]
-          };
+        // Check if dataset is an array and has elements
+        if (Array.isArray(dataset) && dataset.length > 0) {
+          for (let i = 0; i < dataset.length; i++) {
+            const offering: any = dataset[i];
+            const properties: { [key: string]: string } = {
+              "edc:id": offering["edc:id"],
+              "edc:name": offering["edc:name"],
+              // no version in the new format
+              "edc:version": "",
+              "type": offering["@type"],
+              "edc:contenttype": offering["edc:contenttype"],
+              // not sure what is supposed to map to originatior, so just put the id again
+              "edc:originator": offering["edc:originator"]
+            };
+            const asset: Asset = new Asset(properties);
 
-          if(isFirst){
-            contractOffer.id = dataSet["odrl:hasPolicy"]["@id"];
-            contractOffer.asset = asset
-            contractOffer.policy = policy;
+            let policy: Policy = {
+              // Currently hardcoded to SET since parsed type is {"@policytype": "set"}
+              "@type": TypeEnum.Set,
+              "@id": offering["odrl:hasPolicy"]["@id"],
+              // No assignee or assigner in DCAT
+              "odrl:obligation": offering["odrl:hasPolicy"]["odrl:obligation"],
+              "odrl:permission": offering["odrl:hasPolicy"]["odrl:permission"],
+              "odrl:prohibition": offering["odrl:hasPolicy"]["odrl:prohibition"],
+              "odrl:target": offering["odrl:hasPolicy"]["odrl:target"]
+            };
 
-            arr.push(contractOffer)
-            isFirst = false;
-          } else {
             const newContractOffer: ContractOffer = {
               asset: asset,
-              contractOffers: contractOffer.contractOffers,
-              "dcat:service": contractOffer["dcat:service"],
-              "dcat:dataset": contractOffer["dcat:dataset"],
-              id: dataSet["odrl:hasPolicy"]["@id"],
-              "edc:originator": contractOffer["edc:originator"],
-              policy: policy
+              contractOffers: [],
+              "dcat:dataset": [],
+              id: offering["odrl:hasPolicy"]["@id"],
+              "edc:originator": offering["edc:originator"],
+              policy: policy,
+              //dcat:service property is not an array, just a single service...for now hardcoded to first dataservice
+              'dcat:service': {
+                id: dataservice["@id"],
+                terms: dataservice["dct:terms"],
+                endpointUrl: dataservice["dct:endpointUrl"]
+              }
             };
             arr.push(newContractOffer);
           }
+        } else {
+          // Handle the case when data is empty (no elements)
+          console.log("catalogue is empty");
         }
         return arr;
-      })), reduce((acc, val) => {
-        for(let i = 0; i < val.length; i++){
-          for(let j = 0; j < val[i].length; j++){
-            acc.push(val[i][j]);
-          }
-        }
-        return acc;
-      }, new Array<ContractOffer>()));
-  }
+      })
+    )
+  };
 
   initiateTransfer(transferRequest: TransferRequestDto): Observable<string> {
     return this.transferProcessService.initiateTransfer(transferRequest).pipe(map(t => t["@id"]!))

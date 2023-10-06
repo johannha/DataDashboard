@@ -55,6 +55,9 @@ export class CatalogBrowserComponent implements OnInit {
   }
 
   onNegotiateClicked(contractOffer: ContractOffer) {
+    const policy = contractOffer.policy;
+    policy["odrl:target"] = contractOffer.asset.id;
+    policy['@id'] = contractOffer.id + ":" + contractOffer.asset.id + ":" + "MzY3ZGZlYTgtYWI5OS00OWMwLThmNmYtM2Y2YmMxNGE1ZDc4";
     const initiateRequest: NegotiationInitiateRequestDto = {
       connectorAddress: contractOffer["edc:originator"],
       "@context": {
@@ -62,11 +65,14 @@ export class CatalogBrowserComponent implements OnInit {
         "odrl": "http://www.w3.org/ns/odrl/2/"
       },
       offer: {
-        offerId: contractOffer.id,
+        // fix for strange offerid format required by the backend
+        offerId: contractOffer.id + ":" + contractOffer.asset.id + ":" + "MzY3ZGZlYTgtYWI5OS00OWMwLThmNmYtM2Y2YmMxNGE1ZDc4",
         assetId: contractOffer.asset.id,
-        policy: contractOffer.policy,
+        policy: policy,
       },
-      connectorId: 'connector',
+      connectorId: "provider",
+      consumerId: "consumer",
+      providerId: "provider",
       protocol: 'dataspace-protocol-http'
     };
 

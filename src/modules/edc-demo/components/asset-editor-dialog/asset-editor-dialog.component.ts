@@ -21,6 +21,11 @@ export class AssetEditorDialog implements OnInit {
   container: string = 'src-container';
   blobname: string = '';
 
+  originator: string = '';
+  baseUrl: string = '';
+
+  gaiaxSelfdescription: string = '';
+
   constructor(private dialogRef: MatDialogRef<AssetEditorDialog>,
       @Inject('STORAGE_TYPES') public storageTypes: StorageType[]) {
   }
@@ -35,13 +40,16 @@ export class AssetEditorDialog implements OnInit {
         "name": this.name,
         "version": this.version,
         "contenttype": this.contenttype,
+        "asset:prop:gaiax:selfdescription": this.gaiaxSelfdescription,
       },
       dataAddress: {
         "type": this.storageTypeId,
-        "account": this.account,
-        "container": this.container,
-        "blobname": this.blobname,
-        "keyName": `${this.account}-key1`
+        "name": this.id,
+        "baseUrl": this.baseUrl,
+        //"account": this.account,
+        //"container": this.container,
+        //"blobname": this.blobname,
+        //"keyName": `${this.account}-key1`
       }
     };
 

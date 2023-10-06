@@ -16,15 +16,14 @@ export class AssetEditorDialog implements OnInit {
   name: string = '';
   contenttype: string = '';
 
-  storageTypeId: string = 'AzureStorage';
+  storageTypeId: string = 'HttpData';
   account: string = '';
   container: string = 'src-container';
   blobname: string = '';
 
-  originator: string = '';
-  baseUrl: string = '';
+  originator: string = 'http://localhost:8184/protocol';
+  baseUrl: string = "http://techslides.com/demos/samples/sample.txt";
 
-  gaiaxSelfdescription: string = '';
 
   constructor(private dialogRef: MatDialogRef<AssetEditorDialog>,
       @Inject('STORAGE_TYPES') public storageTypes: StorageType[]) {
@@ -40,7 +39,7 @@ export class AssetEditorDialog implements OnInit {
         "name": this.name,
         "version": this.version,
         "contenttype": this.contenttype,
-        "asset:prop:gaiax:selfdescription": this.gaiaxSelfdescription,
+        "originator": this.originator,
       },
       dataAddress: {
         "type": this.storageTypeId,

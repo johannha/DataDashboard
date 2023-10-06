@@ -74,10 +74,10 @@ export class ContractViewerComponent implements OnInit {
 
     dialogRef.afterClosed().pipe(first()).subscribe(result => {
       const storageTypeId: string = result.storageTypeId;
-      if (storageTypeId !== 'AzureStorage') {
+      /* if (storageTypeId !== 'AzureStorage') {
         this.notificationService.showError("Only storage type \"AzureStorage\" is implemented currently!")
         return;
-      }
+      } */
       this.createTransferRequest(contract, storageTypeId)
         .pipe(switchMap(trq => this.transferService.initiateTransfer(trq)))
         .subscribe(transferId => {
@@ -101,10 +101,9 @@ export class ContractViewerComponent implements OnInit {
         connectorId: "consumer", //doesn't matter, but cannot be null
         dataDestination: {
           "type": storageTypeId,
-          account: this.homeConnectorStorageAccount, // CAUTION: hardcoded value for AzureBlob
-          // container: omitted, so it will be auto-assigned by the EDC runtime
+          "baseUrl": "http://localhost:4000/api/consumer/store",
         },
-        managedResources: true,
+        managedResources: false,
         transferType: {isFinite: true}, //must be there, otherwise NPE on backend
         connectorAddress: offeredAsset.originator,
         protocol: 'dataspace-protocol-http',
